@@ -1,0 +1,312 @@
+openapi: 3.0.0
+info:
+  title: 'LBH & CoL Directory of Services: Data Store Service'
+  description: >-
+    The data sore service stores and retrieves data in the Directory of Services system.
+  version: 1.0.0
+paths:
+  /:
+    get:
+      tags:
+        - metadata
+      responses:
+        '200':
+          description: Returns a list of data store service resource endpoints
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Resources'
+        default:
+          $ref: '#/components/responses/Error'
+  /versions:
+    get:
+      tags:
+        - metadata
+      operationId: listVersions
+      summary: List API versions
+      responses:
+        200:
+          $ref: '#/components/responses/Versions'
+        default:
+          $ref: '#/components/responses/Error'
+  /health/alive:
+    get:
+      description: "This endpoint returns a 200 status code when the HTTP server is up running.\nThis status does currently not include checks whether the database connection is working.\nThis endpoint does not require the `X-Forwarded-Proto` header when TLS termination is set.\n\nBe aware that if you are running multiple nodes, the health status will never refer to the cluster state, only to a single instance."
+      tags:
+        - health
+      summary: "Check the Alive Status"
+      operationId: isInstanceAlive
+      responses:
+        200:
+          description: "Health Status"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+        500:
+          $ref: '#/components/responses/Error'
+  /health/ready:
+    get:
+      description: "This endpoint returns a 200 status code when the HTTP server is up running and the environment dependencies (e.g.\nthe database) are responsive as well.\n\nThis status does currently not include checks whether the database connection is working.\nThis endpoint does not require the `X-Forwarded-Proto` header when TLS termination is set.\n\nBe aware that if you are running multiple nodes of ORY Hydra, the health status will never refer to the cluster state, only to a single instance."
+      tags:
+        - health
+      summary: "Check the Readiness Status"
+      operationId: isInstanceReady
+      responses:
+        200:
+          description: 'Health status'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthStatus'
+        503:
+          description: 'Health Not Ready status'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/HealthNotReadyStatus'
+  /providers:
+    get:
+      description: "This endpoint returns all providers."
+      tags:
+        - providers
+      summary: "Return all providers"
+      responses:
+        200:
+          description: "All providers"
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Providers'
+        404:
+          description: "No providers found"
+    post:
+      description: "Add a new provider"
+      tags:
+        - providers
+      summary: "Add a new provider"
+      requestBody:
+        description: 'Data required for a provider'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/AddProvider'
+      responses:
+        201:
+          description: "Succesfully added a new provider"
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/AddedProvider'
+  /providers/{id}:
+    get:
+      description: 'Get a specific provider'
+      tags:
+        - providers
+      summary: 'Get a specific provider'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the provider
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Provider found'
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Providers'
+        404:
+          description: 'Provider not found'
+    put:
+      description: 'Update a specific provider'
+      tags:
+        - providers
+      summary: 'Update a specific provider'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the provider
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Data required for a provider'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/AddProvider'
+      responses:
+        200:
+          description: 'Provider udpated'
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Providers'
+    delete:
+      description: 'Delete a provider'
+      tags:
+        - providers
+      summary: 'Delete a provider'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the provider
+          required: true
+          schema:
+            type: string
+      responses:
+        410:
+          description: 'Provider deleted'
+components:
+  responses:
+    Versions:
+      description: |-
+        200 response
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Versions'
+    Error:
+      description: Unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Error'
+  schemas:
+    Error:
+      required:
+        - code
+        - message
+      properties:
+        code:
+          type: integer
+          format: int32
+        message:
+          type: string
+    Resources:
+      title: Resources
+      items:
+        $ref: '#/components/schemas/Resource'
+    Resource:
+      required:
+        - apiPath
+        - description
+        - apiVersionNumber
+        - apiUrl
+        - apiDocumentationUrl
+      properties:
+        apiPath:
+          type: string
+          example: "/versions"
+        description:
+          type: string
+          example: "List of API versions"
+        apiVersionNumber:
+          type: number
+          example: 1.1
+        apiUrl:
+          type: string
+          example: "https://data.lbhc.weareconvivio.com/versions"
+        apiDocumentationUrl:
+          type: string
+          example: "https://developer.lbhc.weareconvivio.com/data/api/versions"
+    Versions:
+      title: Versions
+      items:
+        $ref: '#/components/schemas/Version'
+    Version:
+      required:
+        - version
+        - id
+        - updated
+        - current
+        - deprecated
+      properties:
+        version:
+          type: number
+          example: 1.1
+        id:
+          type: string
+          example: "v1.1"
+        updated:
+          type: string
+          example: "2018-09-13T16:52:11"
+        current:
+          type: boolean
+          example: true
+        deprecated:
+          type: boolean
+          example: false
+    HealthNotReadyStatus:
+        properties:
+          errors:
+            description: 'Errors contains a list of errors that caused the not ready status.'
+            type: object
+            example:
+              code: 503
+              message: "Internal server error"
+            additionalProperties:
+              type: string
+              example: "Nginx"
+    HealthStatus:
+      properties:
+        status:
+          description: 'Status always contains "ok".'
+          type: string
+          example: "ok"
+    Providers:
+      properties:
+        id:
+          description: 'UUID of provider'
+          type: string
+          example: '7a52060d-be2d-482e-bd9e-0f8041554925'
+        name:
+          description: 'The name of the provider'
+          type: string
+          example: 'Hackney Quest'
+        published:
+          description: 'Boolean if provider is published'
+          type: integer
+          example: 1
+        venue_id:
+          description: 'ID of the providers venue'
+          type: string
+          example: '5308687a-aec7-4ec3-9f56-1ebbd275a161'
+        contact_id:
+          description: 'ID of the providers contact'
+          type: string
+          example: '22632363-e326-4991-8f10-5483e5047758'
+    AddedProvider:
+      properties:
+        id:
+          description: 'UUID of newly added provider'
+          type: string
+          example: 'dd06b31c-61f6-4612-abca-fd3de120f419S'
+        name:
+          description: 'The name of the provider'
+          type: string
+          example: 'Hackney Quest'
+    AddProvider:
+      properties:
+        name:
+          description: 'The name of the provider'
+          type: string
+          example: 'Hackney Quest'
+          required: true
+        published:
+          description: 'Is provider published?'
+          type: integer
+          example: 0
+        venue_id:
+          description: 'ID of the providers venue'
+          type: string
+          example: '5308687a-aec7-4ec3-9f56-1ebbd275a161'
+        contact_id:
+          description: 'ID of the providers contact'
+          type: string
+          example: '22632363-e326-4991-8f10-5483e5047758'
