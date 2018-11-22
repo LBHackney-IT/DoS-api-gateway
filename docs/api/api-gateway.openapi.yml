@@ -486,16 +486,17 @@ components:
           type: string
           example: 'Hackney Quest'
     AddProvider:
+      required:
+        - name
+        - published
       properties:
         name:
           description: 'The name of the provider'
           type: string
           example: 'Hackney Quest'
-          required: true
         published:
           description: 'Is provider published?'
           type: integer
-          required: true
           example: 0
         venue_id:
           description: 'ID of the providers venue'
@@ -550,16 +551,17 @@ components:
           type: string
           example: 'POSITIVE YOUTH ENGAGEMENT PROGRAMME (PYEP)'
     AddService:
+      required:
+        - name
+        - published
       properties:
         name:
           description: 'The name of the service'
           type: string
-          required: true
           example: 'POSITIVE YOUTH ENGAGEMENT PROGRAMME (PYEP)'
         published:
           description: 'Boolean if service is published'
           type: integer
-          required: true
           example: 0
         provider_id:
           description: 'ID of the provider'
@@ -602,9 +604,10 @@ components:
           type: string
           example: 'Community group'
     AddTerm:
+      required:
+       - name
       properties:
         name:
           description: 'The name of the term'
           type: string
-          required: true
           example: 'Community group'
