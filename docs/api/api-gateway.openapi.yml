@@ -1,8 +1,8 @@
 openapi: 3.0.0
 info:
-  title: 'LBH & CoL Directory of Services: Data Store Service'
+  title: 'LBH & CoL Directory of Services: Gateway API'
   description: >-
-    The data sore service stores and retrieves data in the Directory of Services system.
+    Provides an API gateway for developers to ingest.
   version: 1.0.0
 paths:
   /:
