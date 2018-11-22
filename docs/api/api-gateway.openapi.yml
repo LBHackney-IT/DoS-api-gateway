@@ -77,7 +77,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/Providers'
+                $ref: '#/components/schemas/Providers'
         404:
           description: "No providers found"
     post:
@@ -91,14 +91,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/schemas/AddProvider'
+              $ref: '#/components/schemas/AddProvider'
       responses:
         201:
           description: "Succesfully added a new provider"
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/AddedProvider'
+                $ref: '#/components/schemas/AddedProvider'
   /providers/{id}:
     get:
       description: 'Get a specific provider'
@@ -118,7 +118,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/Providers'
+                $ref: '#/components/schemas/Providers'
         404:
           description: 'Provider not found'
     put:
@@ -139,14 +139,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/schemas/AddProvider'
+              $ref: '#/components/schemas/AddProvider'
       responses:
         200:
           description: 'Provider udpated'
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/Providers'
+                $ref: '#/components/schemas/Providers'
     delete:
       description: 'Delete a provider'
       tags:
@@ -174,7 +174,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/Services'
+                $ref: '#/components/schemas/Services'
         404:
           description: "No services found"
     post:
@@ -188,14 +188,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/schemas/AddService'
+              $ref: '#/components/schemas/AddService'
       responses:
         201:
           description: "Succesfully added a new service"
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/AddedService'
+                $ref: '#/components/schemas/AddedService'
   /services/{id}:
     get:
       description: 'Get a specific service'
@@ -215,7 +215,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/Services'
+                $ref: '#/components/schemas/Services'
         404:
           description: 'Service not found'
     put:
@@ -236,14 +236,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/schemas/AddService'
+              $ref: '#/components/schemas/AddService'
       responses:
         200:
           description: 'Provider udpated'
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/Services'
+                $ref: '#/components/schemas/Services'
     delete:
       description: 'Delete a service'
       tags:
@@ -271,7 +271,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/Term'
+                $ref: '#/components/schemas/Term'
         404:
           description: "No taxonomy found"
     post:
@@ -285,14 +285,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/schemas/AddTerm'
+              $ref: '#/components/schemas/AddTerm'
       responses:
         201:
           description: "Succesfully added a new term"
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/AddedTerm'
+                $ref: '#/components/schemas/AddedTerm'
   /taxonomy/{id}:
     get:
       description: 'Get a specific term'
@@ -312,7 +312,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/taxonomy'
+                $ref: '#/components/schemas/taxonomy'
         404:
           description: 'term not found'
     put:
@@ -333,14 +333,14 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#components/schemas/AddTerm'
+              $ref: '#/components/schemas/AddTerm'
       responses:
         200:
           description: 'Provider udpated'
           content:
             application/json:
               schema:
-                $ref: '#components/schemas/taxonomy'
+                $ref: '#/components/schemas/taxonomy'
     delete:
       description: 'Delete a term'
       tags:
