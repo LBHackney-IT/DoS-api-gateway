@@ -589,7 +589,7 @@ components:
           description: 'UUID of term'
           type: string
           example: '7a52060d-be2d-482e-bd9e-0f8041554925'
-        name:
+        term:
           description: 'The name of the term'
           type: string
           example: 'Community group'
@@ -599,7 +599,7 @@ components:
           description: 'UUID of newly added term'
           type: string
           example: 'dd06b31c-61f6-4612-abca-fd3de120f419S'
-        name:
+        term:
           description: 'The name of the term'
           type: string
           example: 'Community group'
@@ -607,7 +607,7 @@ components:
       required:
        - name
       properties:
-        name:
+        term:
           description: 'The name of the term'
           type: string
           example: 'Community group'
