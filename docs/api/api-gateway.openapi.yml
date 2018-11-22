@@ -312,7 +312,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/taxonomy'
+                $ref: '#/components/schemas/Term'
         404:
           description: 'term not found'
     put:
@@ -340,7 +340,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/taxonomy'
+                $ref: '#/components/schemas/Term'
     delete:
       description: 'Delete a term'
       tags:
