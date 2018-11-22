@@ -196,6 +196,69 @@ paths:
             application/json:
               schema:
                 $ref: '#components/schemas/AddedService'
+  /services/{id}:
+    get:
+      description: 'Get a specific service'
+      tags:
+        - services
+      summary: 'Get a specific service'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the service
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Service found'
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Services'
+        404:
+          description: 'Service not found'
+    put:
+      description: 'Update a specific service'
+      tags:
+        - services
+      summary: 'Update a specific service'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the service
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Data required for a service'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/AddService'
+      responses:
+        200:
+          description: 'Provider udpated'
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Services'
+    delete:
+      description: 'Delete a service'
+      tags:
+        - services
+      summary: 'Delete a service'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the service
+          required: true
+          schema:
+            type: string
+      responses:
+        410:
+          description: 'Service deleted'
 components:
   responses:
     Versions:
