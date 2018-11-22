@@ -162,6 +162,40 @@ paths:
       responses:
         410:
           description: 'Provider deleted'
+  /services:
+    get:
+      description: "This endpoint returns all services."
+      tags:
+        - services
+      summary: "Return all services"
+      responses:
+        200:
+          description: "All services"
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Services'
+        404:
+          description: "No services found"
+    post:
+      description: "Add a new service"
+      tags:
+        - services
+      summary: "Add a new service"
+      requestBody:
+        description: 'Data required for a service'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/AddService'
+      responses:
+        201:
+          description: "Succesfully added a new service"
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/AddedService'
 components:
   responses:
     Versions:
@@ -301,6 +335,7 @@ components:
         published:
           description: 'Is provider published?'
           type: integer
+          required: true
           example: 0
         venue_id:
           description: 'ID of the providers venue'
@@ -310,3 +345,79 @@ components:
           description: 'ID of the providers contact'
           type: string
           example: '22632363-e326-4991-8f10-5483e5047758'
+    Services:
+      properties:
+        id:
+          description: 'UUID of service'
+          type: string
+          example: '7a52060d-be2d-482e-bd9e-0f8041554925'
+        name:
+          description: 'The name of the service'
+          type: string
+          example: 'POSITIVE YOUTH ENGAGEMENT PROGRAMME (PYEP)'
+        published:
+          description: 'Boolean if service is published'
+          type: integer
+          example: 1
+        provider_id:
+          description: 'ID of the provider'
+          type: string
+          example: 'dd06b31c-61f6-4612-abca-fd3de120f419S'
+        event_id:
+          description: 'ID of the event'
+          type: string
+          example: '71209163-8f71-49a1-9959-4fbd75a79ac1'
+        contact_id:
+          description: 'ID of the service contact'
+          type: string
+          example: '22632363-e326-4991-8f10-5483e5047758'
+        elegibility_id:
+          description: 'ID of eligibility object'
+          type: string
+          example: 'bcd76798-d811-46d7-b7aa-64bdde71c18c'
+        costoption_id:
+          description: 'ID of cost option object'
+          type: string
+          example: '03b0a53f-0994-4a30-8988-8aed0dfbb560'
+    AddedService:
+      properties:
+        id:
+          description: 'UUID of newly added service'
+          type: string
+          example: 'dd06b31c-61f6-4612-abca-fd3de120f419S'
+        name:
+          description: 'The name of the service'
+          type: string
+          example: 'POSITIVE YOUTH ENGAGEMENT PROGRAMME (PYEP)'
+    AddService:
+      properties:
+        name:
+          description: 'The name of the service'
+          type: string
+          required: true
+          example: 'POSITIVE YOUTH ENGAGEMENT PROGRAMME (PYEP)'
+        published:
+          description: 'Boolean if service is published'
+          type: integer
+          required: true
+          example: 0
+        provider_id:
+          description: 'ID of the provider'
+          type: string
+          example: 'dd06b31c-61f6-4612-abca-fd3de120f419S'
+        event_id:
+          description: 'ID of the event'
+          type: string
+          example: '71209163-8f71-49a1-9959-4fbd75a79ac1'
+        contact_id:
+          description: 'ID of the service contact'
+          type: string
+          example: '22632363-e326-4991-8f10-5483e5047758'
+        elegibility_id:
+          description: 'ID of eligibility object'
+          type: string
+          example: 'bcd76798-d811-46d7-b7aa-64bdde71c18c'
+        costoption_id:
+          description: 'ID of cost option object'
+          type: string
+          example: '03b0a53f-0994-4a30-8988-8aed0dfbb560'
