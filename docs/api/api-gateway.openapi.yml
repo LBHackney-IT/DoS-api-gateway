@@ -259,6 +259,103 @@ paths:
       responses:
         410:
           description: 'Service deleted'
+  /taxonomy:
+    get:
+      description: "This endpoint returns all terms."
+      tags:
+        - taxonomy
+      summary: "Return all terms"
+      responses:
+        200:
+          description: "All terms"
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/Term'
+        404:
+          description: "No taxonomy found"
+    post:
+      description: "Add a new term"
+      tags:
+        - taxonomy
+      summary: "Add a new term"
+      requestBody:
+        description: 'Data required for a term'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/AddTerm'
+      responses:
+        201:
+          description: "Succesfully added a new term"
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/AddedTerm'
+  /taxonomy/{id}:
+    get:
+      description: 'Get a specific term'
+      tags:
+        - taxonomy
+      summary: 'Get a specific term'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the term
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'term found'
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/taxonomy'
+        404:
+          description: 'term not found'
+    put:
+      description: 'Update a specific term'
+      tags:
+        - taxonomy
+      summary: 'Update a specific term'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the term
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Data required for a term'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#components/schemas/AddTerm'
+      responses:
+        200:
+          description: 'Provider udpated'
+          content:
+            application/json:
+              schema:
+                $ref: '#components/schemas/taxonomy'
+    delete:
+      description: 'Delete a term'
+      tags:
+        - taxonomy
+      summary: 'Delete a term'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the term
+          required: true
+          schema:
+            type: string
+      responses:
+        410:
+          description: 'Term deleted'
 components:
   responses:
     Versions:
@@ -484,3 +581,30 @@ components:
           description: 'ID of cost option object'
           type: string
           example: '03b0a53f-0994-4a30-8988-8aed0dfbb560'
+    Term:
+      properties:
+        id:
+          description: 'UUID of term'
+          type: string
+          example: '7a52060d-be2d-482e-bd9e-0f8041554925'
+        name:
+          description: 'The name of the term'
+          type: string
+          example: 'Community group'
+    AddedTerm:
+      properties:
+        id:
+          description: 'UUID of newly added term'
+          type: string
+          example: 'dd06b31c-61f6-4612-abca-fd3de120f419S'
+        name:
+          description: 'The name of the term'
+          type: string
+          example: 'Community group'
+    AddTerm:
+      properties:
+        name:
+          description: 'The name of the term'
+          type: string
+          required: true
+          example: 'Community group'
