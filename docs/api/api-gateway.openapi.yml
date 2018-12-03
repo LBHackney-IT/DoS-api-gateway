@@ -453,6 +453,103 @@ paths:
       responses:
         410:
           description: 'Event deleted'
+  /venues:
+    get:
+      description: "This endpoint returns all venues."
+      tags:
+        - venues
+      summary: "Return all venues"
+      responses:
+        200:
+          description: "All venues"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+        404:
+          description: "No venues found"
+    post:
+      description: "Add a new venue"
+      tags:
+        - venues
+      summary: "Add a new venue"
+      requestBody:
+        description: 'Data required for an venue'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddVenue'
+      responses:
+        201:
+          description: "Succesfully added a new venue"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddedVenue'
+  /venues/{id}:
+    get:
+      description: 'Get a specific venue'
+      tags:
+        - venues
+      summary: 'Get a specific venue'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the venue
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'venue found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+        404:
+          description: 'Venue not found'
+    put:
+      description: 'Update a specific venue'
+      tags:
+        - venues
+      summary: 'Update a specific venue'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the venue
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Data required for a venue'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddVenue'
+      responses:
+        200:
+          description: 'Provider udpated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Venue'
+    delete:
+      description: 'Delete a venue'
+      tags:
+        - venues
+      summary: 'Delete a venue'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the venue
+          required: true
+          schema:
+            type: string
+      responses:
+        410:
+          description: 'Venue deleted'
 
 components:
   responses:
@@ -749,3 +846,68 @@ components:
           description: 'UUID of the venue'
           type: string
           example: '8769812b-d077-4008-bce7-31deb1f82e97'
+    Venue:
+      properties:
+        id:
+          description: 'UUID of venue'
+          type: string
+          example: 'a30f7cae-9db6-4347-a35f-4ff202fe7dde'
+        service_id:
+          description: 'UUID of the provider'
+          type: string
+          example: '8bfd9405-70cd-407d-a9af-8830a7c719c4'
+        provider_id:
+          description: 'UUID of the provider'
+          type: string
+          example: '27e6bfc8-176c-4a46-b564-91dd19d64de5'
+        name:
+          description: 'Name of the venue'
+          type: string
+          example: 'Hackney Community Centre'
+        address:
+          description: 'Address of the venue'
+          type: string
+          example: '1 Hillman St, London, E8 1DY'
+    AddedVenue:
+      properties:
+        id:
+          description: 'UUID of venue'
+          type: string
+          example: 'a30f7cae-9db6-4347-a35f-4ff202fe7dde'
+        service_id:
+          description: 'UUID of the provider'
+          type: string
+          example: '8bfd9405-70cd-407d-a9af-8830a7c719c4'
+        provider_id:
+          description: 'UUID of the provider'
+          type: string
+          example: '27e6bfc8-176c-4a46-b564-91dd19d64de5'
+        name:
+          description: 'Name of the venue'
+          type: string
+          example: 'Hackney Community Centre'
+        address:
+          description: 'Address of the venue'
+          type: string
+          example: '1 Hillman St, London, E8 1DY'
+    AddVenue:
+      required:
+       - name
+       - address
+      properties:
+        service_id:
+          description: 'UUID of the provider'
+          type: string
+          example: '8bfd9405-70cd-407d-a9af-8830a7c719c4'
+        provider_id:
+          description: 'UUID of the provider'
+          type: string
+          example: '27e6bfc8-176c-4a46-b564-91dd19d64de5'
+        name:
+          description: 'Name of the venue'
+          type: string
+          example: 'Hackney Community Centre'
+        address:
+          description: 'Address of the venue'
+          type: string
+          example: '1 Hillman St, London, E8 1DY'
