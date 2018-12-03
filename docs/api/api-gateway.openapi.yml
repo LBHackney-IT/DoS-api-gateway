@@ -960,6 +960,10 @@ components:
           description: 'ID of the providers contact'
           type: string
           example: '22632363-e326-4991-8f10-5483e5047758'
+        flagged:
+          description: 'Should this content be reivewed?'
+          type: boolean
+          example: false
     AddedProvider:
       properties:
         id:
@@ -991,6 +995,10 @@ components:
           description: 'ID of the providers contact'
           type: string
           example: '22632363-e326-4991-8f10-5483e5047758'
+        flagged:
+          description: 'Should this content be reivewed?'
+          type: boolean
+          example: false
     Services:
       properties:
         id:
@@ -1025,6 +1033,10 @@ components:
           description: 'ID of cost option object'
           type: string
           example: '03b0a53f-0994-4a30-8988-8aed0dfbb560'
+        flagged:
+          description: 'Should this content be reivewed?'
+          type: boolean
+          example: false
     AddedService:
       properties:
         id:
@@ -1068,6 +1080,10 @@ components:
           description: 'ID of cost option object'
           type: string
           example: '03b0a53f-0994-4a30-8988-8aed0dfbb560'
+        flagged:
+          description: 'Should this content be reivewed?'
+          type: boolean
+          example: false
     Term:
       properties:
         id:
@@ -1124,6 +1140,10 @@ components:
           description: 'UUID of the venue'
           type: string
           example: '8769812b-d077-4008-bce7-31deb1f82e97'
+        flagged:
+          description: 'Should this content be reivewed?'
+          type: boolean
+          example: false
     AddEvent:
       required:
        - details
@@ -1158,6 +1178,10 @@ components:
           description: 'Address of the venue'
           type: string
           example: '1 Hillman St, London, E8 1DY'
+        flagged:
+          description: 'Should this content be reivewed?'
+          type: boolean
+          example: false
     AddedVenue:
       properties:
         id:
@@ -1180,6 +1204,10 @@ components:
           description: 'Address of the venue'
           type: string
           example: '1 Hillman St, London, E8 1DY'
+        flagged:
+          description: 'Should this content be reivewed?'
+          type: boolean
+          example: false
     AddVenue:
       required:
        - name
@@ -1219,6 +1247,10 @@ components:
           description: 'Phone number of the contact'
           type: string
           example: '020 8356 3000'
+        flagged:
+          description: 'Should this content be reivewed?'
+          type: boolean
+          example: false
     AddedContact:
       properties:
         id:
@@ -1241,6 +1273,10 @@ components:
           description: 'Phone number of the contact'
           type: string
           example: '020 8356 3000'
+        flagged:
+          description: 'Should this content be reivewed?'
+          type: boolean
+          example: false
     AddContact:
       required:
        - url
