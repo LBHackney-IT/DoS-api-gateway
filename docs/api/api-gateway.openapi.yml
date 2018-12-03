@@ -1185,10 +1185,6 @@ components:
        - name
        - address
       properties:
-        service_id:
-          description: 'UUID of the provider'
-          type: string
-          example: '8bfd9405-70cd-407d-a9af-8830a7c719c4'
         provider_id:
           description: 'UUID of the provider'
           type: string
@@ -1250,10 +1246,6 @@ components:
        - url
        - name
       properties:
-        id:
-          description: 'UUID of contact'
-          type: string
-          example: '24ad0d03-cb05-4539-845d-d30fecf774cd'
         url:
           description: 'Url of the contact'
           type: string
