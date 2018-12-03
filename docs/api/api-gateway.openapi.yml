@@ -1318,3 +1318,7 @@ components:
           description: 'Detail of the eligibility'
           type: string
           example: 'Over 60s only'
+# Added by API Auto Mocking Plugin
+servers:
+  - description: SwaggerHub API Auto Mocking
+    url: https://virtserver.swaggerhub.com/LBHC/lbh-co_l_directory_of_services_gateway_api/1.0.0
