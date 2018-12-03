@@ -744,6 +744,103 @@ paths:
       responses:
         410:
           description: 'Cost option deleted'
+  /eligibilities:
+    get:
+      description: "This endpoint returns all eligibilities."
+      tags:
+        - eligibilities
+      summary: "Return all eligibilities"
+      responses:
+        200:
+          description: "All eligibilities"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Eligibility'
+        404:
+          description: "No eligibilities found"
+    post:
+      description: "Add a new eligibilities"
+      tags:
+        - eligibilities
+      summary: "Add a new eligibility"
+      requestBody:
+        description: 'Data required for an eligibility'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddEligibility'
+      responses:
+        201:
+          description: "Succesfully added a new eligibility"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddedEligibility'
+  /eligibilities/{id}:
+    get:
+      description: 'Get a specific eligibility'
+      tags:
+        - eligibilities
+      summary: 'Get a specific eligibility'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the eligibility
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'Eligibility found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Eligibility'
+        404:
+          description: 'Elegibility not found'
+    put:
+      description: 'Update a specific eligibility'
+      tags:
+        - eligibilities
+      summary: 'Update a specific eligibility'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the eligibility
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Data required for an eligibility'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddEligibility'
+      responses:
+        200:
+          description: 'Provider udpated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Eligibility'
+    delete:
+      description: 'Delete an eligibility'
+      tags:
+        - eligibilities
+      summary: 'Delete an eligibility'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the eligibility
+          required: true
+          schema:
+            type: string
+      responses:
+        410:
+          description: 'Cost option deleted'
 components:
   responses:
     Versions:
@@ -1201,3 +1298,31 @@ components:
           description: 'Detail of the cost option'
           type: string
           example: '£8.50 an hour'
+    Eligibility:
+      properties:
+        id:
+          description: 'UUID of elegibility'
+          type: string
+          example: '3c9247ac-9a69-4855-b0b0-2c308eb5ff30'
+        elegibility:
+          description: 'Detail of the eligibility'
+          type: string
+          example: 'Over 60s only'
+    AddedEligibility:
+      properties:
+        id:
+          description: 'UUID of the eligibility'
+          type: string
+          example: '3c9247ac-9a69-4855-b0b0-2c308eb5ff30'
+        elegibility:
+          description: 'Detail of the eligibility'
+          type: string
+          example: 'Over 60s only'
+    AddEligibility:
+      required:
+       - elegibility
+      properties:
+        elegibility:
+          description: 'Detail of the eligibility'
+          type: string
+          example: 'Over 60s only'
