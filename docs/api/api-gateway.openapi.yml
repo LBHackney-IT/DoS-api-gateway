@@ -853,7 +853,7 @@ components:
           type: string
           example: 'a30f7cae-9db6-4347-a35f-4ff202fe7dde'
         service_id:
-          description: 'UUID of the provider'
+          description: 'UUID of the service'
           type: string
           example: '8bfd9405-70cd-407d-a9af-8830a7c719c4'
         provider_id:
@@ -875,7 +875,7 @@ components:
           type: string
           example: 'a30f7cae-9db6-4347-a35f-4ff202fe7dde'
         service_id:
-          description: 'UUID of the provider'
+          description: 'UUID of the service'
           type: string
           example: '8bfd9405-70cd-407d-a9af-8830a7c719c4'
         provider_id:
@@ -896,7 +896,7 @@ components:
        - address
       properties:
         service_id:
-          description: 'UUID of the provider'
+          description: 'UUID of the service'
           type: string
           example: '8bfd9405-70cd-407d-a9af-8830a7c719c4'
         provider_id:
