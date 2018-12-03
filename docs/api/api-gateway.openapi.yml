@@ -647,6 +647,103 @@ paths:
       responses:
         410:
           description: 'Contact deleted'
+  /costoptions:
+    get:
+      description: "This endpoint returns all cost options."
+      tags:
+        - costoptions
+      summary: "Return all cost options"
+      responses:
+        200:
+          description: "All cost options"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostOption'
+        404:
+          description: "No cost options found"
+    post:
+      description: "Add a new cost option"
+      tags:
+        - costoptions
+      summary: "Add a new cost option"
+      requestBody:
+        description: 'Data required for an cost option'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddCostOption'
+      responses:
+        201:
+          description: "Succesfully added a new cost option"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddedCostOption'
+  /costoptions/{id}:
+    get:
+      description: 'Get a specific cost option'
+      tags:
+        - costoptions
+      summary: 'Get a specific cost option'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the cost option
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'cost option found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostOption'
+        404:
+          description: 'CostOption not found'
+    put:
+      description: 'Update a specific cost option'
+      tags:
+        - costoptions
+      summary: 'Update a specific cost option'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the cost option
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Data required for a cost option'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddCostOption'
+      responses:
+        200:
+          description: 'Provider udpated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/CostOption'
+    delete:
+      description: 'Delete a cost option'
+      tags:
+        - costoptions
+      summary: 'Delete a cost option'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the cost option
+          required: true
+          schema:
+            type: string
+      responses:
+        410:
+          description: 'Cost option deleted'
 components:
   responses:
     Versions:
@@ -1076,3 +1173,31 @@ components:
           description: 'Phone number of the contact'
           type: string
           example: '020 8356 3000'
+    CostOption:
+      properties:
+        id:
+          description: 'UUID of cost option'
+          type: string
+          example: 'f3ca08a9-197e-4b9b-9f30-72267ed0d921'
+        option:
+          description: 'Detail of the cost option'
+          type: string
+          example: '£8.50 an hour'
+    AddedCostOption:
+      properties:
+        id:
+          description: 'UUID of cost option'
+          type: string
+          example: 'f3ca08a9-197e-4b9b-9f30-72267ed0d921'
+        option:
+          description: 'Detail of the cost option'
+          type: string
+          example: '£8.50 an hour'
+    AddCostOption:
+      required:
+       - option
+      properties:
+        option:
+          description: 'Detail of the cost option'
+          type: string
+          example: '£8.50 an hour'
