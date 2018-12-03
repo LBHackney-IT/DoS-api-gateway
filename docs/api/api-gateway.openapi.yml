@@ -356,6 +356,104 @@ paths:
       responses:
         410:
           description: 'Term deleted'
+  /events:
+    get:
+      description: "This endpoint returns all events."
+      tags:
+        - events
+      summary: "Return all events"
+      responses:
+        200:
+          description: "All events"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        404:
+          description: "No events found"
+    post:
+      description: "Add a new event"
+      tags:
+        - events
+      summary: "Add a new event"
+      requestBody:
+        description: 'Data required for an event'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddEvent'
+      responses:
+        201:
+          description: "Succesfully added a new event"
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AddedEvent'
+  /events/{id}:
+    get:
+      description: 'Get a specific event'
+      tags:
+        - events
+      summary: 'Get a specific event'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the event
+          required: true
+          schema:
+            type: string
+      responses:
+        200:
+          description: 'event found'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+        404:
+          description: 'event not found'
+    put:
+      description: 'Update a specific event'
+      tags:
+        - events
+      summary: 'Update a specific event'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the event
+          required: true
+          schema:
+            type: string
+      requestBody:
+        description: 'Data required for a event'
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/AddEvent'
+      responses:
+        200:
+          description: 'Provider udpated'
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Event'
+    delete:
+      description: 'Delete a event'
+      tags:
+        - events
+      summary: 'Delete a event'
+      parameters:
+        - name: id
+          in: path
+          description: The UUID of the event
+          required: true
+          schema:
+            type: string
+      responses:
+        410:
+          description: 'Event deleted'
+
 components:
   responses:
     Versions:
@@ -611,3 +709,43 @@ components:
           description: 'The name of the term'
           type: string
           example: 'Community group'
+    Event:
+      properties:
+        id:
+          description: 'UUID of event'
+          type: string
+          example: 'fd2da797-faa8-4cb3-b4a8-45ff0174ab51'
+        details:
+          description: 'Details of the event'
+          type: string
+          example: 'Community group run on the first and second Thursday of the month'
+        venue_id:
+          description: 'UUID of the venue'
+          type: string
+          example: '8769812b-d077-4008-bce7-31deb1f82e97'
+    AddedEvent:
+      properties:
+        id:
+          description: 'UUID of newly added event'
+          type: string
+          example: 'fd2da797-faa8-4cb3-b4a8-45ff0174ab51'
+        details:
+          description: 'Details of the event'
+          type: string
+          example: 'Community group run on the first and second Thursday of the month'
+        venue_id:
+          description: 'UUID of the venue'
+          type: string
+          example: '8769812b-d077-4008-bce7-31deb1f82e97'
+    AddEvent:
+      required:
+       - details
+      properties:
+        details:
+          description: 'Details of the event'
+          type: string
+          example: 'Community group run on the first and second Thursday of the month'
+        venue_id:
+          description: 'UUID of the venue'
+          type: string
+          example: '8769812b-d077-4008-bce7-31deb1f82e97'
