@@ -98,7 +98,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AddedProvider'
+                $ref: '#/components/schemas/Providers'
   /providers/{id}:
     get:
       description: 'Get a specific provider'
@@ -174,7 +174,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Services'
+                $ref: '#/components/schemas/Service'
         404:
           description: "No services found"
     post:
@@ -195,7 +195,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AddedService'
+                $ref: '#/components/schemas/Service'
   /services/{id}:
     get:
       description: 'Get a specific service'
@@ -215,7 +215,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Services'
+                $ref: '#/components/schemas/Service'
         404:
           description: 'Service not found'
     put:
@@ -243,7 +243,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Services'
+                $ref: '#/components/schemas/Service'
     delete:
       description: 'Delete a service'
       tags:
@@ -292,7 +292,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AddedTerm'
+                $ref: '#/components/schemas/Term'
   /taxonomy/{id}:
     get:
       description: 'Get a specific term'
@@ -389,7 +389,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AddedEvent'
+                $ref: '#/components/schemas/Event'
   /events/{id}:
     get:
       description: 'Get a specific event'
@@ -583,7 +583,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AddedContact'
+                $ref: '#/components/schemas/Contact'
   /contacts/{id}:
     get:
       description: 'Get a specific contact'
@@ -680,7 +680,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AddedCostOption'
+                $ref: '#/components/schemas/CostOption'
   /costoptions/{id}:
     get:
       description: 'Get a specific cost option'
@@ -777,7 +777,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AddedEligibility'
+                $ref: '#/components/schemas/Eligibility'
   /eligibilities/{id}:
     get:
       description: 'Get a specific eligibility'
@@ -964,16 +964,6 @@ components:
           description: 'Should this content be reivewed?'
           type: boolean
           example: false
-    AddedProvider:
-      properties:
-        id:
-          description: 'UUID of newly added provider'
-          type: string
-          example: 'dd06b31c-61f6-4612-abca-fd3de120f419S'
-        name:
-          description: 'The name of the provider'
-          type: string
-          example: 'Hackney Quest'
     AddProvider:
       required:
         - name
@@ -999,7 +989,7 @@ components:
           description: 'Should this content be reivewed?'
           type: boolean
           example: false
-    Services:
+    Service:
       properties:
         id:
           description: 'UUID of service'
@@ -1041,20 +1031,6 @@ components:
           description: 'Should this content be reivewed?'
           type: boolean
           example: false
-    AddedService:
-      properties:
-        id:
-          description: 'UUID of newly added service'
-          type: string
-          example: 'dd06b31c-61f6-4612-abca-fd3de120f419S'
-        name:
-          description: 'The name of the service'
-          type: string
-          example: 'POSITIVE YOUTH ENGAGEMENT PROGRAMME (PYEP)'
-        desc:
-          description: 'Description of the service'
-          type: string
-          example: 'The PYEP provides a huge number of events for youth in your area'
     AddService:
       required:
         - name
@@ -1107,16 +1083,6 @@ components:
           description: 'The name of the term'
           type: string
           example: 'Community group'
-    AddedTerm:
-      properties:
-        id:
-          description: 'UUID of newly added term'
-          type: string
-          example: 'dd06b31c-61f6-4612-abca-fd3de120f419S'
-        term:
-          description: 'The name of the term'
-          type: string
-          example: 'Community group'
     AddTerm:
       required:
        - name
@@ -1143,28 +1109,6 @@ components:
           description: 'UUID of the venue'
           type: string
           example: '8769812b-d077-4008-bce7-31deb1f82e97'
-    AddedEvent:
-      properties:
-        id:
-          description: 'UUID of newly added event'
-          type: string
-          example: 'fd2da797-faa8-4cb3-b4a8-45ff0174ab51'
-        details:
-          description: 'Details of the event'
-          type: string
-          example: 'Community group run on the first and second Thursday of the month'
-        venue_id:
-          description: 'UUID of the venue'
-          type: string
-          example: '8769812b-d077-4008-bce7-31deb1f82e97'
-        time:
-          description: 'Time the event is run'
-          type: string
-          example: 'Every first and second Thursday of the month'
-        flagged:
-          description: 'Should this content be reivewed?'
-          type: boolean
-          example: false
     AddEvent:
       required:
        - details
@@ -1300,44 +1244,6 @@ components:
           description: 'Should this content be reivewed?'
           type: boolean
           example: false
-    AddedContact:
-      properties:
-        id:
-          description: 'UUID of contact'
-          type: string
-          example: '24ad0d03-cb05-4539-845d-d30fecf774cd'
-        url:
-          description: 'Url of the contact'
-          type: string
-          example: 'https://www.hackney.gov.uk/'
-        email:
-          description: 'Email address of the contact'
-          type: string
-          example: 'bob@hackney.gov.uk'
-        name:
-          description: 'Name of the contact'
-          type: string
-          example: 'Bob Smith'
-        position:
-          description: 'Position of the contact'
-          type: string
-          example: 'CEO'
-        social_facebook:
-          description: 'Link to facebook profile'
-          type: string
-          example: 'https://facebook.com'
-        social_twitter:
-          description: 'Link to twitter profile'
-          type: string
-          example: 'https://twitter.com'
-        phonenumber:
-          description: 'Phone number of the contact'
-          type: string
-          example: '020 8356 3000'
-        flagged:
-          description: 'Should this content be reivewed?'
-          type: boolean
-          example: false
     AddContact:
       required:
        - url
@@ -1381,16 +1287,6 @@ components:
           description: 'Detail of the cost option'
           type: string
           example: '£8.50 an hour'
-    AddedCostOption:
-      properties:
-        id:
-          description: 'UUID of cost option'
-          type: string
-          example: 'f3ca08a9-197e-4b9b-9f30-72267ed0d921'
-        option:
-          description: 'Detail of the cost option'
-          type: string
-          example: '£8.50 an hour'
     AddCostOption:
       required:
        - option
@@ -1403,16 +1299,6 @@ components:
       properties:
         id:
           description: 'UUID of elegibility'
-          type: string
-          example: '3c9247ac-9a69-4855-b0b0-2c308eb5ff30'
-        elegibility:
-          description: 'Detail of the eligibility'
-          type: string
-          example: 'Over 60s only'
-    AddedEligibility:
-      properties:
-        id:
-          description: 'UUID of the eligibility'
           type: string
           example: '3c9247ac-9a69-4855-b0b0-2c308eb5ff30'
         elegibility:
