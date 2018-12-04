@@ -486,7 +486,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/AddedVenue'
+                $ref: '#/components/schemas/Venue'
   /venues/{id}:
     get:
       description: 'Get a specific venue'
@@ -1126,36 +1126,6 @@ components:
           type: string
           example: 'Every first and second Thursday of the month'
     Venue:
-      properties:
-        id:
-          description: 'UUID of venue'
-          type: string
-          example: 'a30f7cae-9db6-4347-a35f-4ff202fe7dde'
-        service_id:
-          description: 'UUID of the provider'
-          type: string
-          example: '8bfd9405-70cd-407d-a9af-8830a7c719c4'
-        provider_id:
-          description: 'UUID of the provider'
-          type: string
-          example: '27e6bfc8-176c-4a46-b564-91dd19d64de5'
-        name:
-          description: 'Name of the venue'
-          type: string
-          example: 'Hackney Community Centre'
-        address:
-          description: 'Address of the venue'
-          type: string
-          example: '1 Hillman St, London, E8 1DY'
-        details:
-          description: 'Details of the venue'
-          type: string
-          example: 'This is an awesome venue but hard to find'
-        flagged:
-          description: 'Should this content be reivewed?'
-          type: boolean
-          example: false
-    AddedVenue:
       properties:
         id:
           description: 'UUID of venue'
