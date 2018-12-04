@@ -3,7 +3,7 @@ info:
   title: 'LBH & CoL Directory of Services: Gateway API'
   description: >-
     Provides an API gateway for developers to ingest.
-  version: 1.0.0
+  version: "1.0.1"
 paths:
   /:
     get:
@@ -1009,6 +1009,10 @@ components:
           description: 'The name of the service'
           type: string
           example: 'POSITIVE YOUTH ENGAGEMENT PROGRAMME (PYEP)'
+        desc:
+          description: 'Description of the service'
+          type: string
+          example: 'The PYEP provides a huge number of events for youth in your area'
         published:
           description: 'Boolean if service is published'
           type: integer
@@ -1047,15 +1051,24 @@ components:
           description: 'The name of the service'
           type: string
           example: 'POSITIVE YOUTH ENGAGEMENT PROGRAMME (PYEP)'
+        desc:
+          description: 'Description of the service'
+          type: string
+          example: 'The PYEP provides a huge number of events for youth in your area'
     AddService:
       required:
         - name
         - published
+        - desc
       properties:
         name:
           description: 'The name of the service'
           type: string
           example: 'POSITIVE YOUTH ENGAGEMENT PROGRAMME (PYEP)'
+        desc:
+          description: 'Description of the service'
+          type: string
+          example: 'The PYEP provides a huge number of events for youth in your area'
         published:
           description: 'Boolean if service is published'
           type: integer
@@ -1122,6 +1135,10 @@ components:
           description: 'Details of the event'
           type: string
           example: 'Community group run on the first and second Thursday of the month'
+        time:
+          description: 'Time the event is run'
+          type: string
+          example: 'Every first and second Thursday of the month'
         venue_id:
           description: 'UUID of the venue'
           type: string
@@ -1140,6 +1157,10 @@ components:
           description: 'UUID of the venue'
           type: string
           example: '8769812b-d077-4008-bce7-31deb1f82e97'
+        time:
+          description: 'Time the event is run'
+          type: string
+          example: 'Every first and second Thursday of the month'
         flagged:
           description: 'Should this content be reivewed?'
           type: boolean
@@ -1156,6 +1177,10 @@ components:
           description: 'UUID of the venue'
           type: string
           example: '8769812b-d077-4008-bce7-31deb1f82e97'
+        time:
+          description: 'Time the event is run'
+          type: string
+          example: 'Every first and second Thursday of the month'
     Venue:
       properties:
         id:
@@ -1178,6 +1203,10 @@ components:
           description: 'Address of the venue'
           type: string
           example: '1 Hillman St, London, E8 1DY'
+        details:
+          description: 'Details of the venue'
+          type: string
+          example: 'This is an awesome venue but hard to find'
         flagged:
           description: 'Should this content be reivewed?'
           type: boolean
@@ -1204,6 +1233,10 @@ components:
           description: 'Address of the venue'
           type: string
           example: '1 Hillman St, London, E8 1DY'
+        details:
+          description: 'Details of the venue'
+          type: string
+          example: 'This is an awesome venue but hard to find'
         flagged:
           description: 'Should this content be reivewed?'
           type: boolean
@@ -1225,6 +1258,10 @@ components:
           description: 'Address of the venue'
           type: string
           example: '1 Hillman St, London, E8 1DY'
+        details:
+          description: 'Details of the venue'
+          type: string
+          example: 'This is an awesome venue but hard to find'
     Contact:
       properties:
         id:
@@ -1243,6 +1280,18 @@ components:
           description: 'Name of the contact'
           type: string
           example: 'Bob Smith'
+        position:
+          description: 'Position of the contact'
+          type: string
+          example: 'CEO'
+        social_facebook:
+          description: 'Link to facebook profile'
+          type: string
+          example: 'https://facebook.com'
+        social_twitter:
+          description: 'Link to twitter profile'
+          type: string
+          example: 'https://twitter.com'
         phonenumber:
           description: 'Phone number of the contact'
           type: string
@@ -1269,6 +1318,18 @@ components:
           description: 'Name of the contact'
           type: string
           example: 'Bob Smith'
+        position:
+          description: 'Position of the contact'
+          type: string
+          example: 'CEO'
+        social_facebook:
+          description: 'Link to facebook profile'
+          type: string
+          example: 'https://facebook.com'
+        social_twitter:
+          description: 'Link to twitter profile'
+          type: string
+          example: 'https://twitter.com'
         phonenumber:
           description: 'Phone number of the contact'
           type: string
@@ -1294,6 +1355,18 @@ components:
           description: 'Name of the contact'
           type: string
           example: 'Bob Smith'
+        position:
+          description: 'Position of the contact'
+          type: string
+          example: 'CEO'
+        social_facebook:
+          description: 'Link to facebook profile'
+          type: string
+          example: 'https://facebook.com'
+        social_twitter:
+          description: 'Link to twitter profile'
+          type: string
+          example: 'https://twitter.com'
         phonenumber:
           description: 'Phone number of the contact'
           type: string
