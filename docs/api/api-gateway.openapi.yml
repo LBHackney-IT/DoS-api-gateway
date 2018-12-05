@@ -960,6 +960,16 @@ components:
           description: 'ID of the providers contact'
           type: string
           example: '22632363-e326-4991-8f10-5483e5047758'
+        created:
+          description: 'The date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          type: string
+          format: date-time
+          example: '2017-07-21T17:32:28Z'
+        updated:
+          description: 'The date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          type: string
+          format: date-time
+          example: '2017-07-21T18:38:30Z'
         flagged:
           description: 'Should this content be reivewed?'
           type: boolean
@@ -1027,6 +1037,16 @@ components:
           description: 'ID of cost option object'
           type: string
           example: '03b0a53f-0994-4a30-8988-8aed0dfbb560'
+        created:
+          description: 'The date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          type: string
+          format: date-time
+          example: '2017-07-21T17:32:28Z'
+        updated:
+          description: 'The date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          type: string
+          format: date-time
+          example: '2017-07-21T18:38:30Z'
         flagged:
           description: 'Should this content be reivewed?'
           type: boolean
@@ -1109,6 +1129,16 @@ components:
           description: 'UUID of the venue'
           type: string
           example: '8769812b-d077-4008-bce7-31deb1f82e97'
+        created:
+          description: 'The date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          type: string
+          format: date-time
+          example: '2017-07-21T17:32:28Z'
+        updated:
+          description: 'The date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          type: string
+          format: date-time
+          example: '2017-07-21T18:38:30Z'
     AddEvent:
       required:
        - details
@@ -1151,6 +1181,16 @@ components:
           description: 'Details of the venue'
           type: string
           example: 'This is an awesome venue but hard to find'
+        created:
+          description: 'The date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          type: string
+          format: date-time
+          example: '2017-07-21T17:32:28Z'
+        updated:
+          description: 'The date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          type: string
+          format: date-time
+          example: '2017-07-21T18:38:30Z'
         flagged:
           description: 'Should this content be reivewed?'
           type: boolean
@@ -1210,6 +1250,16 @@ components:
           description: 'Phone number of the contact'
           type: string
           example: '020 8356 3000'
+        created:
+          description: 'The date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          type: string
+          format: date-time
+          example: '2017-07-21T17:32:28Z'
+        updated:
+          description: 'The date-time notation as defined by RFC 3339, section 5.6, for example, 2017-07-21T17:32:28Z'
+          type: string
+          format: date-time
+          example: '2017-07-21T18:38:30Z'
         flagged:
           description: 'Should this content be reivewed?'
           type: boolean
@@ -1286,4 +1336,4 @@ components:
 # Added by API Auto Mocking Plugin
 servers:
   - description: SwaggerHub API Auto Mocking
-    url: https://virtserver.swaggerhub.com/LBHC/lbh-co_l_directory_of_services_gateway_api/1.0.0
+    url: https://virtserver.swaggerhub.com/LBHC/lbh-co_l_directory_of_services_gateway_api/1.0.1
