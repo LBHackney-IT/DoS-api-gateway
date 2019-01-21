@@ -88,6 +88,9 @@ $app->singleton(
 // Redis for data storage, etc.
 $app->register(Illuminate\Redis\RedisServiceProvider::class);
 
+// Kafka event queue service provider
+$app->register(Rapide\LaravelQueueKafka\LumenQueueKafkaServiceProvider::class);
+
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
