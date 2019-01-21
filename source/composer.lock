@@ -4,7 +4,7 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#installing-dependencies",
         "This file is @generated automatically"
     ],
-    "content-hash": "5b5fe3420d63ff4ec5bd501f9bd69ea4",
+    "content-hash": "fb9eee150cd2531a24b5e711e615905c",
     "packages": [
         {
             "name": "doctrine/inflector",
@@ -1800,6 +1800,59 @@
                 "simple-cache"
             ],
             "time": "2017-10-23T01:57:42+00:00"
+        },
+        {
+            "name": "rapide/laravel-queue-kafka",
+            "version": "dev-master",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/joesb/laravel-queue-kafka.git",
+                "reference": "1d6c5c6c1ce5352c15a1fe735dbfe2888b2a64d8"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/joesb/laravel-queue-kafka/zipball/1d6c5c6c1ce5352c15a1fe735dbfe2888b2a64d8",
+                "reference": "1d6c5c6c1ce5352c15a1fe735dbfe2888b2a64d8",
+                "shasum": ""
+            },
+            "require": {
+                "ext-rdkafka": "*",
+                "illuminate/database": "5.4.*|5.5.*||5.6.*|5.7.*",
+                "illuminate/queue": "5.4.*|5.5.*|5.6.*|5.7.*",
+                "illuminate/support": "5.4.*|5.5.*|5.6.*|5.7.*",
+                "php": ">=5.6.4"
+            },
+            "require-dev": {
+                "mockery/mockery": "^0.9.5",
+                "phpunit/phpunit": "^5.5"
+            },
+            "type": "library",
+            "extra": {
+                "laravel": {
+                    "providers": [
+                        "Rapide\\LaravelQueueKafka\\LaravelQueueKafkaServiceProvider"
+                    ]
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Rapide\\LaravelQueueKafka\\": "src/"
+                }
+            },
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Peter Mein",
+                    "email": "petermein@gmail.com"
+                }
+            ],
+            "description": "Kafka driver for Laravel Queue",
+            "support": {
+                "source": "https://github.com/joesb/laravel-queue-kafka/tree/dev-master"
+            },
+            "time": "2019-01-17T10:56:12+00:00"
         },
         {
             "name": "symfony/console",
@@ -4247,7 +4300,9 @@
     ],
     "aliases": [],
     "minimum-stability": "dev",
-    "stability-flags": [],
+    "stability-flags": {
+        "rapide/laravel-queue-kafka": 20
+    },
     "prefer-stable": true,
     "prefer-lowest": false,
     "platform": {
