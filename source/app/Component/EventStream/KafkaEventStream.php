@@ -96,18 +96,15 @@ class KafkaEventStream
         $this->setQueueName();
         $this->setQueueBrokers();
         $this->setConsumerGroupId();
-//        $this->conf = new Conf();
         /** @var \RdKafka\Conf conf */
         $this->conf = $this->container->makeWith('queue.kafka.conf');
         $this->conf->set('group.id', $this->getConsumerGroupId());
         // Initial list of Kafka brokers
         $this->conf->set('metadata.broker.list', $this->getQueueBrokers());
         /** @var RdKafka\Producer producer */
-//        $this->producer = new Producer();
         $this->producer = $this->container->makeWith('queue.kafka.producer');
         $this->producer->addBrokers($this->getQueueBrokers());
         /** @var RdKafka\TopicConf $topicConf */
-//        $topicConf = new TopicConf();
         $topicConf = $this->container->makeWith('queue.kafka.topic_conf');
         $topicConf->set('auto.offset.reset', 'latest');
         $this->producer->newTopic($this->getQueueName(), $topicConf);
