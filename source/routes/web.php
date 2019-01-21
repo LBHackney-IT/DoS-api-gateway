@@ -11,6 +11,34 @@
 |
 */
 
-$router->get('/', function () use ($router) {
-    return $router->app->version();
-});
+/** @var \Laravel\Lumen\Routing\Router $router */
+$router->get(
+    '/',
+    function () use ($router) {
+        return $router->getRoutes();
+    }
+);
+
+$router->group(
+    ['namespace' => 'Events', 'prefix' => 'event'],
+    function () use ($router) {
+        $router->group(
+            ['namespace' => 'Scraper', 'prefix' => 'scraper'],
+            function () use ($router) {
+                $router->group(
+                    ['prefix' => 'web'],
+                    function () use ($router) {
+                        $router->get(
+                            'icare',
+                            ['uses' => 'WebScraperController@iCareHello']
+                        );
+                        $router->get(
+                            'icare/{id}',
+                            ['uses' => 'WebScraperController@iCareService']
+                        );
+                    }
+                );
+            }
+        );
+    }
+);
