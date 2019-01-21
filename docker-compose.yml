@@ -45,6 +45,10 @@ services:
       KAFKA_ERROR_SLEEP: $KAFKA_ERROR_SLEEP
       KAFKA_DEADLOCK_SLEEP: $KAFKA_DEADLOCK_SLEEP
       KAFKA_SECURITY_PROTOCOL: $KAFKA_SECURITY_PROTOCOL
+      REDIS_HOST: redis
+      REDIS_PASSWORD: $REDIS_PASSWORD
+      REDIS_PORT: $REDIS_PORT
+      REDIS_DB: $REDIS_DB
 ## Read instructions at https://wodby.com/stacks/php/docs/local/xdebug/
 #      PHP_XDEBUG: 1
 #      PHP_XDEBUG_DEFAULT_ENABLE: 1
@@ -110,6 +114,8 @@ services:
     image: wodby/redis:$REDIS_TAG
     volumes:
       - redis-data:/data
+    environment:
+      REDIS_PASSWORD: $REDIS_PASSWORD
 
 #  adminer:
 #    container_name: "${PROJECT_NAME}_adminer"

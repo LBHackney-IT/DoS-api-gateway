@@ -23,9 +23,9 @@ $app = new Laravel\Lumen\Application(
     dirname(__DIR__)
 );
 
-// $app->withFacades();
+ $app->withFacades();
 
-// $app->withEloquent();
+ $app->withEloquent();
 
 /*
 |--------------------------------------------------------------------------
@@ -77,6 +77,9 @@ $app->singleton(
 | totally optional, so you are not required to uncomment this line.
 |
 */
+
+// Redis for data storage, etc.
+$app->register(Illuminate\Redis\RedisServiceProvider::class);
 
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
