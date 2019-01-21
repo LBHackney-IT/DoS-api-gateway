@@ -243,7 +243,8 @@ services:
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock
 
-#volumes:
+volumes:
+  redis-data:
 #  project-db-data:
 ## Docker-sync for macOS users
 #  docker-sync:
