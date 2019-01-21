@@ -8,7 +8,7 @@ up:
 	@echo "Starting up containers for $(PROJECT_NAME)..."
 	docker-compose pull
 	docker-compose up -d --remove-orphans
-	@echo "Site up at http://${PROJECT_BASE_URL}"
+	@echo "Site up at http://${PROJECT_BASE_URL}:${PUBLIC_PORT}"
 
 down: stop
 
