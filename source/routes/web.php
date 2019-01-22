@@ -40,5 +40,14 @@ $router->group(
                 );
             }
         );
+        $router->group(
+            ['namespace' => 'Storage', 'prefix' => 'storage'],
+            function () use ($router) {
+                $router->post(
+                    'test',
+                    ['uses' => 'StorageController@test']
+                );
+            }
+        );
     }
 );
