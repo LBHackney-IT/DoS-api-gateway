@@ -3,6 +3,7 @@
 namespace app\Http\Controllers\Events\Storage;
 
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Rapide\LaravelQueueKafka\Queue\Connectors\KafkaConnector;
 
 /**
@@ -20,20 +21,18 @@ class StorageController extends Controller
     /**
      * Test storage.
      *
+     * @param \Illuminate\Http\Request $request - An HTTP request object.
+     *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function test()
+    public function test(Request $request)
     {
         // $build = [true];
         $app = app();
         $connector = new KafkaConnector($app);
         $this->queue = $connector->connect($this->getConfig());
-        $jobName = 'job.store';
-        $jobData = [
-            'one',
-            'two',
-            'three',
-        ];
+        $jobName = 'job.data.get';
+        $jobData = $request->all();
         $this->queue->push($jobName, $jobData, 'store');
         return response()->json($jobData);
     }

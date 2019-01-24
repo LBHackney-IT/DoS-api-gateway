@@ -32,10 +32,10 @@ $router->group(
                             'icare',
                             ['uses' => 'WebScraperController@iCareHello']
                         );
-                        $router->get(
-                            'icare/{id}',
-                            ['uses' => 'WebScraperController@iCareService']
-                        );
+//                        $router->get(
+//                            'icare/{id}',
+//                            ['uses' => 'WebScraperController@iCareService']
+//                        );
                     }
                 );
             }
