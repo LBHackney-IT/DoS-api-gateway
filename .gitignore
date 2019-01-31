@@ -1,5 +1,6 @@
 # Local environment files
 .env
+source/public/info.php
 
 # vendor directory
 source/vendor
