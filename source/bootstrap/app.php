@@ -91,6 +91,9 @@ $app->register(Illuminate\Redis\RedisServiceProvider::class);
 // Kafka event queue service provider
 $app->register(Rapide\LaravelQueueKafka\LumenQueueKafkaServiceProvider::class);
 
+// Event sourced jobs provider.
+$app->register(App\Providers\EventSourcedJobProvider::class);
+
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);
