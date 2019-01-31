@@ -92,16 +92,16 @@ services:
       - api
       - traefik
 
-  mailhog:
-    image: mailhog/mailhog
-    container_name: "${PROJECT_NAME}_mailhog"
-    labels:
-      - 'traefik.backend=mailhog'
-      - 'traefik.port=8025'
-      - 'traefik.frontend.rule=Host:mailhog.${PROJECT_BASE_URL}'
-      - 'traefik.docker.network=traefik'
-    networks:
-      - api
+#  mailhog:
+#    image: mailhog/mailhog
+#    container_name: "${PROJECT_NAME}_mailhog"
+#    labels:
+#      - 'traefik.backend=mailhog'
+#      - 'traefik.port=8025'
+#      - 'traefik.frontend.rule=Host:mailhog.${PROJECT_BASE_URL}'
+#      - 'traefik.docker.network=traefik'
+#    networks:
+#      - api
 
   redis:
     container_name: "${PROJECT_NAME}_redis"
