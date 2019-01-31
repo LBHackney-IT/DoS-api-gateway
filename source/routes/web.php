@@ -47,6 +47,14 @@ $router->group(
                     'test',
                     ['uses' => 'StorageController@test']
                 );
+                $router->post(
+                    'provider',
+                    ['uses' => 'StorageController@provider']
+                );
+                $router->put(
+                    'provider/{id}',
+                    ['uses' => 'StorageController@providerUpdate']
+                );
             }
         );
     }

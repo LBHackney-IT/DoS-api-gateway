@@ -37,6 +37,34 @@ class StorageController extends Controller
         return response()->json($jobData);
     }
 
+    public function provider(Request $request)
+    {
+        $app = app();
+        $connector = new KafkaConnector($app);
+        $this->queue = $connector->connect($this->getConfig());
+        $jobName = 'job.data.store';
+        $jobData = [
+            'type' => 'providers',
+            'values' => $request->all(),
+        ];
+        $this->queue->push($jobName, $jobData, 'store');
+        return response()->json($jobData);
+    }
+
+    public function providerUpdate(Request $request, $id)
+    {
+        $app = app();
+        $connector = new KafkaConnector($app);
+        $this->queue = $connector->connect($this->getConfig());
+        $jobName = 'job.data.update';
+        $jobData = [
+            'type' => 'providers',
+            'id' => $id,
+            'values' => $request->all(),
+        ];
+        $this->queue->push($jobName, $jobData, 'store');
+    }
+
     /**
      * Get the queue config.
      *
