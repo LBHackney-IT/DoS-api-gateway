@@ -4,6 +4,7 @@ namespace app\Http\Controllers\Events\Storage;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Rapide\LaravelQueueKafka\Queue\Connectors\KafkaConnector;
 
 /**
@@ -47,8 +48,9 @@ class StorageController extends Controller
             'type' => 'providers',
             'values' => $request->all(),
         ];
-        $this->queue->push($jobName, $jobData, 'store');
-        return response()->json($jobData);
+        $pushRawCorrelationId = $this->queue->push($jobName, $jobData, 'store');
+        return response()->json(array_merge($jobData, ['pushRawCorrelationId' => $pushRawCorrelationId]));
+//        return response()->json($jobData);
     }
 
     public function providerUpdate(Request $request, $id)
@@ -63,6 +65,7 @@ class StorageController extends Controller
             'values' => $request->all(),
         ];
         $this->queue->push($jobName, $jobData, 'store');
+        return response()->json(['jobName' => $jobName, 'jobData' => $jobData, 'queue' => 'store']);
     }
 
     /**
