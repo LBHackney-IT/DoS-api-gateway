@@ -47,7 +47,10 @@ $router->group(
         );
         $router->get(
             '/',
-            ['uses' => 'ProviderController@getIndex']
+            [
+                'uses' => 'ProviderController@getIndex',
+                'as' => 'listProvider',
+            ]
         );
         $router->put(
             '/{id}',
@@ -55,7 +58,10 @@ $router->group(
         );
         $router->get(
             '/{id}',
-            ['uses' => 'ProviderController@get']
+            [
+                'uses' => 'ProviderController@get',
+                'as' => 'getProvider',
+            ]
         );
         $router->delete(
             '/{id}',

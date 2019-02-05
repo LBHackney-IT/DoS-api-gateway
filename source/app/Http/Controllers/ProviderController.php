@@ -12,6 +12,8 @@ class ProviderController extends AbstractEventController
 
     public function create(Request $request)
     {
+//        return response()->json($this->app->router->namedRoutes);
+
         $jobName = 'job.data.store';
         $jobData = [
             'type' => 'provider',
@@ -19,7 +21,9 @@ class ProviderController extends AbstractEventController
         ];
         $pushRawCorrelationId = $this->queue->push($jobName, $jobData, 'store');
         echo $pushRawCorrelationId;
-        return response()->json(array_merge($jobData, ['pushRawCorrelationId' => $pushRawCorrelationId]));
+        sleep(2);
+        return $this->get($request, $pushRawCorrelationId);
+//        return response()->json(array_merge($jobData, ['pushRawCorrelationId' => $pushRawCorrelationId]));
     }
 
     public function update(Request $request, $id)
@@ -32,7 +36,7 @@ class ProviderController extends AbstractEventController
         ];
         $this->queue->setCorrelationId($id);
         $this->queue->push($jobName, $jobData, 'store');
-        sleep(1);
+        sleep(2);
         return $this->get($request, $id);
 //        return response()->json(['jobName' => $jobName, 'jobData' => $jobData, 'queue' => 'store']);
     }
