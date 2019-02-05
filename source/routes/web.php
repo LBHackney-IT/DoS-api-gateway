@@ -51,9 +51,17 @@ $router->group(
                     'provider',
                     ['uses' => 'StorageController@provider']
                 );
+                $router->get(
+                    'provider',
+                    ['uses' => 'StorageController@providerGetIndex']
+                );
                 $router->put(
                     'provider/{id}',
                     ['uses' => 'StorageController@providerUpdate']
+                );
+                $router->get(
+                    'provider/{id}',
+                    ['uses' => 'StorageController@providerGet']
                 );
             }
         );

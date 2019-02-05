@@ -42,9 +42,8 @@ class ApiDataSave
     public function dispatch()
     {
         $this->setModel();
-        // Do something
         $this->cacheSetPayloadData();
-        Log::debug(print_r($this->cacheGetPayloadData(), true), [__METHOD__]);
+//        Log::debug(print_r($this->cacheGetPayloadData(), true), [__METHOD__]);
     }
 
     /**
@@ -56,14 +55,18 @@ class ApiDataSave
     protected function setModel()
     {
         $data = $this->getPayloadData();
-        $model = false;
-        switch ($data['type']) {
-            case 'providers':
-                $model = new Provider($data);
-                break;
-        }
-        if ($model) {
-            $this->model = $model;
+        if (!empty($data['type'])) {
+            $model = false;
+            switch ($data['type']) {
+                case 'provider':
+                    $model = new Provider($data);
+                    break;
+            }
+            if ($model) {
+                $this->model = $model;
+            }
+        } else {
+            throw new \Exception('No data type');
         }
     }
 
@@ -80,7 +83,6 @@ class ApiDataSave
      */
     public function getPayloadData(): array
     {
-        // Do something
         return empty($this->getPayload()['data']) ? [] : $this->getPayload()['data'];
     }
 
