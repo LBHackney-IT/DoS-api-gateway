@@ -2,6 +2,8 @@
 
 namespace App\Component\Model;
 
+use App\Component\Model\HttpResponse\HttpModelResponse;
+
 abstract class AbstractModel implements ModelInterface
 {
     /**
@@ -12,34 +14,39 @@ abstract class AbstractModel implements ModelInterface
     /**
      * @var string
      */
-    protected $id;
+    public $id;
 
     /**
      * @var string
      */
-    protected $type;
+    public $type;
 
     /**
      * @var string
      */
-    protected $name;
+    public $name;
+
+    /**
+     * @var array
+     */
+    protected $responseItems = [];
 
     /**
      * AbstractModel constructor.
      *
-     * @param array $params
+     * @param object $params
      */
-    public function __construct(array $params)
+    public function __construct(object $params)
     {
-        $this->setId($params['id']);
-        $this->setType($params['type']);
-        $this->setData($params['data']);
+        $this->setId($params->id);
+        $this->setType($params->type);
+        $this->setData((object) $params->data);
     }
 
     /**
      * {@inheritdoc}
      */
-    public function setData(array $data)
+    public function setData(object $data)
     {
         $this->data = $data;
     }
@@ -63,7 +70,7 @@ abstract class AbstractModel implements ModelInterface
      */
     protected function getNamedDataItem($name)
     {
-        return empty($this->getData()[$name]) ? null : $this->getData()[$name];
+        return empty($this->getData()->$name) ? null : $this->getData()->$name;
     }
 
     /**

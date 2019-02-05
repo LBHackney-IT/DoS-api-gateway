@@ -59,6 +59,7 @@ class ApiDataSave
             $model = false;
             switch ($data['type']) {
                 case 'provider':
+                    $data = (object) $data;
                     $model = new Provider($data);
                     break;
             }

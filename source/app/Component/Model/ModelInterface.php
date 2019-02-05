@@ -55,9 +55,9 @@ interface ModelInterface
     /**
      * Set the model object data.
      *
-     * @param array $data
+     * @param object $data
      *
      * @return void
      */
-    public function setData(array $data);
+    public function setData(object $data);
 }

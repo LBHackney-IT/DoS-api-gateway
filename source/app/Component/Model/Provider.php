@@ -7,36 +7,50 @@ class Provider extends AbstractModelWithDates
     /**
      * @var bool
      */
-    protected $published;
+    public $published;
 
     /**
      * @var bool
      */
-    protected $flagged;
+    public $flagged;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $venueId;
+    public $venueId;
 
     /**
-     * @var string
+     * @var string|null
      */
-    protected $contactId;
+    public $contactId;
+
+    /**
+     * @var string|null
+     */
+    public $description;
+
+    protected $responseItems = [
+        'id' => 'id',
+        'name' => 'name',
+        'description' => 'description',
+    ];
 
     /**
      * Provider constructor.
      *
-     * @param array $params
+     * @param object $params
      *
      * @throws \Exception
      */
-    public function __construct(array $params)
+    public function __construct(object $params)
     {
         parent::__construct($params);
         $this->setName($this->getNamedDataItem('name'));
         $this->setPublished();
         $this->setFlagged();
+        $this->setContactId($this->getNamedDataItem('contact_id'));
+        $this->setVenueId($this->getNamedDataItem('venue_id'));
+        $this->setDescription($this->getNamedDataItem('description'));
     }
 
     /**
@@ -82,7 +96,7 @@ class Provider extends AbstractModelWithDates
     /**
      * Get the venue UUID
      *
-     * @return string
+     * @return string|null
      */
     public function venueId()
     {
@@ -94,7 +108,7 @@ class Provider extends AbstractModelWithDates
      *
      * @param string $venueId
      */
-    public function setVenueId(string $venueId): void
+    public function setVenueId($venueId): void
     {
         $this->venueId = $venueId;
     }
@@ -102,7 +116,7 @@ class Provider extends AbstractModelWithDates
     /**
      * Get the contact UUID
      *
-     * @return string
+     * @return string|null
      */
     public function contactId()
     {
@@ -112,10 +126,26 @@ class Provider extends AbstractModelWithDates
     /**
      * Set the contact UUID.
      *
-     * @param string $contactId
+     * @param string|null $contactId
      */
-    public function setContactId(string $contactId): void
+    public function setContactId($contactId): void
     {
         $this->contactId = $contactId;
+    }
+
+    /**
+     * @return string|null
+     */
+    public function description()
+    {
+        return $this->description;
+    }
+
+    /**
+     * @param string|null $description
+     */
+    public function setDescription($description)
+    {
+        $this->description = $description;
     }
 }
