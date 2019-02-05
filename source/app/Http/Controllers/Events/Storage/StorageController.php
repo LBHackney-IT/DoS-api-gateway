@@ -4,6 +4,7 @@ namespace app\Http\Controllers\Events\Storage;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
 use Rapide\LaravelQueueKafka\Queue\Connectors\KafkaConnector;
 
 /**
@@ -44,11 +45,12 @@ class StorageController extends Controller
         $this->queue = $connector->connect($this->getConfig());
         $jobName = 'job.data.store';
         $jobData = [
-            'type' => 'providers',
+            'type' => 'provider',
             'values' => $request->all(),
         ];
-        $this->queue->push($jobName, $jobData, 'store');
-        return response()->json($jobData);
+        $pushRawCorrelationId = $this->queue->push($jobName, $jobData, 'store');
+        return response()->json(array_merge($jobData, ['pushRawCorrelationId' => $pushRawCorrelationId]));
+//        return response()->json($jobData);
     }
 
     public function providerUpdate(Request $request, $id)
@@ -58,9 +60,38 @@ class StorageController extends Controller
         $this->queue = $connector->connect($this->getConfig());
         $jobName = 'job.data.update';
         $jobData = [
-            'type' => 'providers',
+            'type' => 'provider',
             'id' => $id,
             'values' => $request->all(),
+        ];
+        $this->queue->push($jobName, $jobData, 'store');
+        return response()->json(['jobName' => $jobName, 'jobData' => $jobData, 'queue' => 'store']);
+    }
+
+    public function providerGet(Request $request, $id)
+    {
+        $app = app();
+        $connector = new KafkaConnector($app);
+        $this->queue = $connector->connect($this->getConfig());
+        $jobName = 'job.data.get';
+        $jobData = [
+            'queryType' => 'select',
+            'type' => 'provider',
+            'id' => $id,
+            'values' => $request->all(),
+        ];
+        $this->queue->push($jobName, $jobData, 'store');
+    }
+
+    public function providerGetIndex(Request $request)
+    {
+        $app = app();
+        $connector = new KafkaConnector($app);
+        $this->queue = $connector->connect($this->getConfig());
+        $jobName = 'job.data.get';
+        $jobData = [
+            'queryType' => 'index',
+            'type' => 'provider',
         ];
         $this->queue->push($jobName, $jobData, 'store');
     }
