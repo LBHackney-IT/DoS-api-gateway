@@ -1,6 +1,6 @@
 <?php
 
-namespace app\Http\Controllers\Events\Storage;
+namespace App\Http\Controllers\Events\Storage;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
@@ -10,7 +10,7 @@ use Rapide\LaravelQueueKafka\Queue\Connectors\KafkaConnector;
 /**
  * Controller for storing stuff in the data store microservice
  *
- * @package app\Http\Controllers\Storage
+ * @package App\Http\Controllers\Storage
  */
 class StorageController extends Controller
 {

@@ -60,6 +60,27 @@ class RedisCache
     }
 
     /**
+     * @return mixed
+     */
+    public function getSubscribe()
+    {
+//        Log::debug(print_r($this->getCacheId(), true), [__METHOD__]);
+        $cacheId = $this->getCacheId();
+        $subscribe = Redis::subscribe([$this->getCacheId()], function ($message) use ($cacheId) {
+            return RedisCache::getCacheSubscribeResponse($message, $cacheId);
+        });
+        return $subscribe;
+    }
+
+    public static function getCacheSubscribeResponse($data, $cacheId)
+    {
+//        Log::debug(print_r(json_decode($data), true), [__METHOD__]);
+//        Log::debug(print_r($cacheId, true), [__METHOD__]);
+        Redis::unsubscribe([$cacheId]);
+        return response()->json($data);
+    }
+
+    /**
      * @return string
      */
     public function getCacheId(): string

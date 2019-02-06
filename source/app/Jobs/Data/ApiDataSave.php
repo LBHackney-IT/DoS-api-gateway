@@ -41,6 +41,9 @@ class ApiDataSave
      */
     public function dispatch()
     {
+        if (empty($this->getPayloadData())) {
+            throw new \Exception('No payload data');
+        }
         $this->setModel();
         $this->cacheSetPayloadData();
 //        Log::debug(print_r($this->cacheGetPayloadData(), true), [__METHOD__]);

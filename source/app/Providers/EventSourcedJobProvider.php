@@ -1,10 +1,10 @@
 <?php
 
-namespace app\Providers;
+namespace App\Providers;
 
 use App\Jobs\Data\ApiDataJob;
 use App\Jobs\Data\ApiDataSave;
-use function foo\func;
+use App\Jobs\Data\ApiErrorJob;
 use Illuminate\Support\ServiceProvider;
 
 class EventSourcedJobProvider extends ServiceProvider
@@ -19,6 +19,9 @@ class EventSourcedJobProvider extends ServiceProvider
         $this->app->bind('job.api.data', function ($app) {
             return new ApiDataJob($app);
         });
+        $this->app->bind('job.api.error', function ($app) {
+            return new ApiErrorJob($app);
+        });
 
         $this->app->bind('api.data.save', function ($app, $data) {
             return new ApiDataSave($app, $data);
@@ -29,6 +32,7 @@ class EventSourcedJobProvider extends ServiceProvider
     {
         return [
             'job.api.data',
+            'job.api.error',
             'api.data.save',
         ];
     }

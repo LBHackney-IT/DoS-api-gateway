@@ -69,3 +69,34 @@ $router->group(
         );
     }
 );
+$router->group(
+    ['prefix' => 'service'],
+    function () use ($router) {
+        $router->post(
+            '/',
+            ['uses' => 'ServiceController@create']
+        );
+        $router->get(
+            '/',
+            [
+                'uses' => 'ServiceController@getIndex',
+                'as' => 'listService',
+            ]
+        );
+        $router->put(
+            '/{id}',
+            ['uses' => 'ServiceController@update']
+        );
+        $router->get(
+            '/{id}',
+            [
+                'uses' => 'ServiceController@get',
+                'as' => 'getService',
+            ]
+        );
+        $router->delete(
+            '/{id}',
+            ['uses' => 'ServiceController@delete']
+        );
+    }
+);
