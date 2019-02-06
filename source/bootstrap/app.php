@@ -94,6 +94,9 @@ $app->register(Rapide\LaravelQueueKafka\LumenQueueKafkaServiceProvider::class);
 // Event sourced jobs provider.
 $app->register(App\Providers\EventSourcedJobProvider::class);
 
+// Model provider
+$app->register(App\Providers\ModelServiceProvider::class);
+
 // $app->register(App\Providers\AppServiceProvider::class);
 // $app->register(App\Providers\AuthServiceProvider::class);
 // $app->register(App\Providers\EventServiceProvider::class);

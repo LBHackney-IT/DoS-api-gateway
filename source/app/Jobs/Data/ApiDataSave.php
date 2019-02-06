@@ -59,13 +59,14 @@ class ApiDataSave
     {
         $data = $this->getPayloadData();
         if (!empty($data['type'])) {
-            $model = false;
-            switch ($data['type']) {
-                case 'provider':
-                    $data = (object) $data;
-                    $model = new Provider($data);
-                    break;
-            }
+            $modelAbstract = "model.{$data['type']}";
+            $model = $this->app->makeWith($modelAbstract, $data);
+//            switch ($data['type']) {
+//                case 'provider':
+//                    $data = (object) $data;
+//                    $model = new Provider($data);
+//                    break;
+//            }
             if ($model) {
                 $this->model = $model;
             }
