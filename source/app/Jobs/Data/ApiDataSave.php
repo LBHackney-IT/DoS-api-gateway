@@ -46,7 +46,6 @@ class ApiDataSave
         }
         $this->setModel();
         $this->cacheSetPayloadData();
-//        Log::debug(print_r($this->cacheGetPayloadData(), true), [__METHOD__]);
     }
 
     /**
@@ -61,12 +60,6 @@ class ApiDataSave
         if (!empty($data['type'])) {
             $modelAbstract = "model.{$data['type']}";
             $model = $this->app->makeWith($modelAbstract, $data);
-//            switch ($data['type']) {
-//                case 'provider':
-//                    $data = (object) $data;
-//                    $model = new Provider($data);
-//                    break;
-//            }
             if ($model) {
                 $this->model = $model;
             }

@@ -101,14 +101,11 @@ abstract class AbstractEventController extends Controller implements EventContro
     {
         try {
             $data = $this->getData($request, $id);
-            Log::debug(print_r($data, true), [__METHOD__, 103]);
             if ($data->error) {
-                Log::debug('here', [__METHOD__, 106]);
                 return $this->errorResponse($data);
             }
             $modelAbstract = "model.{$data->type}";
             $model = $this->app->makeWith($modelAbstract, (array) $data);
-////            Log::debug(print_r($model->responseData(), true), [__METHOD__]);
             return response()->json($model);
         } catch (Exception $e) {
             $data = [
@@ -138,7 +135,6 @@ abstract class AbstractEventController extends Controller implements EventContro
             }
             return $this->getData($request, $id);
         } else {
-            Log::debug(print_r($data, true), [__METHOD__, 136]);
             return (object) $data;
         }
     }

@@ -155,7 +155,6 @@ abstract class AbstractModelWithDates extends AbstractModel implements ModelInte
                 }
                 break;
             default:
-                Log::debug(print_r($this, true), [__METHOD__]);
                 throw new Exception('Cannot set created date.');
         }
     }
