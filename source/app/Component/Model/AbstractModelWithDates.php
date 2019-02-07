@@ -4,6 +4,7 @@ namespace App\Component\Model;
 
 use Exception;
 use DateTime;
+use Illuminate\Support\Facades\Log;
 
 abstract class AbstractModelWithDates extends AbstractModel implements ModelInterfaceWithDates
 {
@@ -55,21 +56,21 @@ abstract class AbstractModelWithDates extends AbstractModel implements ModelInte
     /**
      * @var \DateTime
      */
-    protected $created;
+    public $created;
 
     /**
      * @var \DateTime
      */
-    protected $updated;
+    public $updated;
 
     /**
      * AbstractModelWithDates constructor.
      *
-     * @param array $params
+     * @param object $params
      *
      * @throws \Exception
      */
-    public function __construct(array $params)
+    public function __construct(object $params)
     {
         parent::__construct($params);
         // Set the timezone for handling created/updated dates.

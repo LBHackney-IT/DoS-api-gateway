@@ -41,9 +41,11 @@ class ApiDataSave
      */
     public function dispatch()
     {
+        if (empty($this->getPayloadData())) {
+            throw new \Exception('No payload data');
+        }
         $this->setModel();
         $this->cacheSetPayloadData();
-//        Log::debug(print_r($this->cacheGetPayloadData(), true), [__METHOD__]);
     }
 
     /**
@@ -56,12 +58,8 @@ class ApiDataSave
     {
         $data = $this->getPayloadData();
         if (!empty($data['type'])) {
-            $model = false;
-            switch ($data['type']) {
-                case 'provider':
-                    $model = new Provider($data);
-                    break;
-            }
+            $modelAbstract = "model.{$data['type']}";
+            $model = $this->app->makeWith($modelAbstract, $data);
             if ($model) {
                 $this->model = $model;
             }

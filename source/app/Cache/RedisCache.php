@@ -28,6 +28,13 @@ class RedisCache
     private $cacheId;
 
     /**
+     * Redis cache TTL.
+     *
+     * @var int
+     */
+    private $ttl = 3600;
+
+    /**
      * CacheStore constructor.
      *
      * @param string $type
@@ -48,6 +55,7 @@ class RedisCache
     {
         $json = json_encode($json);
         Redis::set($this->getCacheId(), $json);
+        Redis::expire($this->getCacheId(), $this->getTtl());
     }
 
     /**
@@ -74,5 +82,25 @@ class RedisCache
             $this->id,
         ];
         $this->cacheId = implode(':', $items);
+    }
+
+    /**
+     * Get the current TTL for the Redis cache, in sec.
+     *
+     * @return int
+     */
+    public function getTtl(): int
+    {
+        return $this->ttl;
+    }
+
+    /**
+     * Set the current TTL for the Redis cache, in sec.
+     *
+     * @param int $ttl
+     */
+    public function setTtl(int $ttl): void
+    {
+        $this->ttl = $ttl;
     }
 }

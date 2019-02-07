@@ -32,38 +32,71 @@ $router->group(
                             'icare',
                             ['uses' => 'WebScraperController@iCareHello']
                         );
-//                        $router->get(
-//                            'icare/{id}',
-//                            ['uses' => 'WebScraperController@iCareService']
-//                        );
                     }
                 );
             }
         );
-        $router->group(
-            ['namespace' => 'Storage', 'prefix' => 'storage'],
-            function () use ($router) {
-                $router->post(
-                    'test',
-                    ['uses' => 'StorageController@test']
-                );
-                $router->post(
-                    'provider',
-                    ['uses' => 'StorageController@provider']
-                );
-                $router->get(
-                    'provider',
-                    ['uses' => 'StorageController@providerGetIndex']
-                );
-                $router->put(
-                    'provider/{id}',
-                    ['uses' => 'StorageController@providerUpdate']
-                );
-                $router->get(
-                    'provider/{id}',
-                    ['uses' => 'StorageController@providerGet']
-                );
-            }
+    }
+);
+$router->group(
+    ['prefix' => 'provider'],
+    function () use ($router) {
+        $router->post(
+            '/',
+            ['uses' => 'ProviderController@create']
+        );
+        $router->get(
+            '/',
+            [
+                'uses' => 'ProviderController@getIndex',
+                'as' => 'listProvider',
+            ]
+        );
+        $router->put(
+            '/{id}',
+            ['uses' => 'ProviderController@update']
+        );
+        $router->get(
+            '/{id}',
+            [
+                'uses' => 'ProviderController@get',
+                'as' => 'getProvider',
+            ]
+        );
+        $router->delete(
+            '/{id}',
+            ['uses' => 'ProviderController@delete']
+        );
+    }
+);
+$router->group(
+    ['prefix' => 'service'],
+    function () use ($router) {
+        $router->post(
+            '/',
+            ['uses' => 'ServiceController@create']
+        );
+        $router->get(
+            '/',
+            [
+                'uses' => 'ServiceController@getIndex',
+                'as' => 'listService',
+            ]
+        );
+        $router->put(
+            '/{id}',
+            ['uses' => 'ServiceController@update']
+        );
+        $router->get(
+            '/{id}',
+            [
+                'uses' => 'ServiceController@get',
+                'as' => 'getService',
+            ]
+        );
+        $router->delete(
+            '/{id}',
+            ['uses' => 'ServiceController@delete']
         );
     }
 );

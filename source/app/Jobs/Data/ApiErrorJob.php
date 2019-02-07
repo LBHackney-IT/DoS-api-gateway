@@ -2,11 +2,13 @@
 
 namespace App\Jobs\Data;
 
+use App\Cache\RedisCache;
 use App\Jobs\Job;
+use Illuminate\Support\Facades\Log;
 use Laravel\Lumen\Application;
 use Rapide\LaravelQueueKafka\Queue\Jobs\KafkaJob;
 
-class ApiDataJob extends Job
+class ApiErrorJob extends Job
 {
     /**
      * Laravel application container.
@@ -19,6 +21,11 @@ class ApiDataJob extends Job
      * @var \Rapide\LaravelQueueKafka\Queue\Jobs\KafkaJob
      */
     protected $job;
+
+    /**
+     * @var RedisCache
+     */
+    protected $cache;
 
     /**
      * Array of job parameters.
@@ -52,12 +59,15 @@ class ApiDataJob extends Job
     {
         try {
             $this->job = $job;
-            $payload = $this->job->payload();
-            /** @var \App\Jobs\Data\ApiDataSave $dataSave */
-            $dataSave = $this->app->makeWith('api.data.save', $payload);
-            $dataSave->dispatch();
+            $payload = $job->payload();
+            $payloadData = $payload['data'];
+            $data = $payloadData['data'];
+            $this->cache = new RedisCache($payloadData['type'], $payloadData['id']);
+            // Since it's an error it should expire in shorter time than regular cache.
+            $this->cache->setTtl(60);
+            $this->cache->set($payload['data']);
+            Log::error(sprintf('%i: %s', $data['code'], $data['message']), $payloadData);
             $this->delete();
-            return;
         } catch (\Exception $e) {
             $this->delete();
             throw $e;
@@ -73,4 +83,5 @@ class ApiDataJob extends Job
     {
         $this->job->delete();
     }
+
 }
