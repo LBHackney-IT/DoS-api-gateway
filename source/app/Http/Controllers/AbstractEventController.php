@@ -79,7 +79,8 @@ abstract class AbstractEventController extends Controller implements EventContro
 //        echo $pushRawCorrelationId;
 //        sleep(2);
 //        return $this->get($request, $pushRawCorrelationId);
-        return response()->json(array_merge($jobData, ['pushRawCorrelationId' => $pushRawCorrelationId]));
+//        return response()->json(array_merge($jobData, ['pushRawCorrelationId' => $pushRawCorrelationId]));
+        return $this->get($request, $pushRawCorrelationId);
     }
 
     public function update(Request $request, $id)
@@ -92,7 +93,6 @@ abstract class AbstractEventController extends Controller implements EventContro
         ];
         $this->queue->setCorrelationId($id);
         $this->queue->push($jobName, $jobData, 'store');
-        sleep(2);
         return $this->get($request, $id);
 //        return response()->json(['jobName' => $jobName, 'jobData' => $jobData, 'queue' => 'store']);
     }

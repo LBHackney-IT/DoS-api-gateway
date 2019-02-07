@@ -63,6 +63,7 @@ class ApiErrorJob extends Job
             $payloadData = $payload['data'];
             $data = $payloadData['data'];
             $this->cache = new RedisCache($payloadData['type'], $payloadData['id']);
+            $this->cache->setTtl(60);
             $this->cache->set($payload['data']);
             Log::error(sprintf('%i: %s', $data['code'], $data['message']), $payloadData);
             $this->delete();
