@@ -6,10 +6,11 @@ use App\Component\Model\HttpResponse\HttpModelResponse;
 
 abstract class AbstractModel implements ModelInterface
 {
+
     /**
      * @var array
      */
-    private $data;
+    protected $data;
 
     /**
      * @var string
@@ -56,7 +57,7 @@ abstract class AbstractModel implements ModelInterface
      *
      * @return array
      */
-    private function getData()
+    protected function getData()
     {
         return $this->data;
     }

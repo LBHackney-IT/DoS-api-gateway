@@ -4,6 +4,7 @@ namespace App\Component\Model;
 
 use Exception;
 use DateTime;
+use Illuminate\Support\Facades\Log;
 
 abstract class AbstractModelWithDates extends AbstractModel implements ModelInterfaceWithDates
 {
@@ -154,6 +155,7 @@ abstract class AbstractModelWithDates extends AbstractModel implements ModelInte
                 }
                 break;
             default:
+                Log::debug(print_r($this, true), [__METHOD__]);
                 throw new Exception('Cannot set created date.');
         }
     }

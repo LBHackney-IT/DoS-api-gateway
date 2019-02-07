@@ -21,16 +21,20 @@ class ModelServiceProvider extends ServiceProvider
     protected function registerDependencies()
     {
         $this->app->bind('model.provider', function ($app, $data) {
-            return new Provider((object) $data);
+            $data = (object) $data;
+            return new Provider($data);
         });
         $this->app->bind('model.service', function ($app, $data) {
-            return new Service((object) $data);
+            $data = (object) $data;
+            return new Service($data);
         });
         $this->app->bind('model.contact', function ($app, $data) {
-            return new Contact((object) $data);
+            $data = (object) $data;
+            return new Contact($data);
         });
         $this->app->bind('model.costoption', function ($app, $data) {
-            return new CostOption((object) $data);
+            $data = (object) $data;
+            return new CostOption($data);
         });
     }
 
